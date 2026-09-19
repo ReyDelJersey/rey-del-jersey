@@ -1,0 +1,116 @@
+backend:
+  name: git-gateway
+  branch: main   # cambia esto si tu rama principal se llama "master"
+
+# Ya no se suben archivos de foto desde aquí — ahora se pega el link de la
+# imagen directamente en cada jersey (necesario para que la IA pueda "verla").
+public_folder: "/"
+
+locale: "es"
+
+collections:
+  - name: "productos"
+    label: "Catálogo de Jerseys"
+    files:
+      - name: "catalogo"
+        label: "Catálogo completo"
+        file: "TIENDA/productos.json"
+        fields:
+
+          # ---------------- FUTBOL ----------------
+          - label: "⚽ Fútbol"
+            name: "futbol"
+            widget: "list"
+            label_singular: "Jersey de fútbol"
+            summary: "{{nombre}} — {{equipo}}"
+            field:
+              label: "Jersey"
+              name: "jersey"
+              widget: "jerseyIA"
+              mostrarLiga: true
+              opcionesLiga:
+                - { label: "Alemania — Bundesliga", value: "alemania" }
+                - { label: "Arabia Saudita — Saudi Pro League", value: "arabia" }
+                - { label: "Argentina — Liga Profesional", value: "argentina" }
+                - { label: "Brasil — Brasileirão", value: "brasil" }
+                - { label: "España — La Liga", value: "espana" }
+                - { label: "España — Segunda División", value: "espana_segunda" }
+                - { label: "Francia — Ligue 1", value: "francia" }
+                - { label: "Holanda — Eredivisie", value: "holanda" }
+                - { label: "Inglaterra — Premier League", value: "inglaterra" }
+                - { label: "Inglaterra — Championship (2da división)", value: "inglaterra_segunda" }
+                - { label: "Italia — Serie A", value: "italia" }
+                - { label: "México — Liga MX", value: "mexico" }
+                - { label: "MLS (EE. UU. / Canadá)", value: "mls" }
+                - { label: "Portugal — Primeira Liga", value: "portugal" }
+                - { label: "Turquía — Süper Lig", value: "turquia" }
+                - { label: "Selecciones nacionales", value: "selecciones" }
+                - { label: "Otras ligas", value: "otras" }
+              # equipo queda como texto libre, igual que antes
+
+          # ---------------- F1 ----------------
+          - label: "🏎️ F1"
+            name: "f1"
+            widget: "list"
+            label_singular: "Jersey de F1"
+            summary: "{{nombre}}"
+            field:
+              label: "Jersey"
+              name: "jersey"
+              widget: "jerseyIA"
+              mostrarLiga: false
+              opcionesEquipo:
+                - { label: "Alpine", value: "alpine" }
+                - { label: "Aston Martin", value: "aston_martin" }
+                - { label: "Audi", value: "audi" }
+                - { label: "Cadillac", value: "cadillac" }
+                - { label: "Ferrari", value: "ferrari" }
+                - { label: "Haas", value: "haas" }
+                - { label: "McLaren", value: "mclaren" }
+                - { label: "Mercedes", value: "mercedes" }
+                - { label: "Racing Bulls", value: "racing_bulls" }
+                - { label: "Red Bull Racing", value: "red_bull" }
+                - { label: "Williams", value: "williams" }
+
+          # ---------------- NBA ----------------
+          - label: "🏀 NBA"
+            name: "nba"
+            widget: "list"
+            label_singular: "Jersey de NBA"
+            summary: "{{nombre}}"
+            field:
+              label: "Jersey"
+              name: "jersey"
+              widget: "jerseyIA"
+              mostrarLiga: false
+              opcionesEquipo:
+                - { label: "Atlanta Hawks", value: "hawks" }
+                - { label: "Boston Celtics", value: "celtics" }
+                - { label: "Brooklyn Nets", value: "nets" }
+                - { label: "Charlotte Hornets", value: "hornets" }
+                - { label: "Chicago Bulls", value: "bulls" }
+                - { label: "Cleveland Cavaliers", value: "cavaliers" }
+                - { label: "Dallas Mavericks", value: "mavericks" }
+                - { label: "Denver Nuggets", value: "nuggets" }
+                - { label: "Detroit Pistons", value: "pistons" }
+                - { label: "Golden State Warriors", value: "warriors" }
+                - { label: "Houston Rockets", value: "rockets" }
+                - { label: "Indiana Pacers", value: "pacers" }
+                - { label: "LA Clippers", value: "clippers" }
+                - { label: "Los Angeles Lakers", value: "lakers" }
+                - { label: "Memphis Grizzlies", value: "grizzlies" }
+                - { label: "Miami Heat", value: "heat" }
+                - { label: "Milwaukee Bucks", value: "bucks" }
+                - { label: "Minnesota Timberwolves", value: "timberwolves" }
+                - { label: "New Orleans Pelicans", value: "pelicans" }
+                - { label: "New York Knicks", value: "knicks" }
+                - { label: "Oklahoma City Thunder", value: "thunder" }
+                - { label: "Orlando Magic", value: "magic" }
+                - { label: "Philadelphia 76ers", value: "76ers" }
+                - { label: "Phoenix Suns", value: "suns" }
+                - { label: "Portland Trail Blazers", value: "trail_blazers" }
+                - { label: "Sacramento Kings", value: "kings" }
+                - { label: "San Antonio Spurs", value: "spurs" }
+                - { label: "Toronto Raptors", value: "raptors" }
+                - { label: "Utah Jazz", value: "jazz" }
+                - { label: "Washington Wizards", value: "wizards" }

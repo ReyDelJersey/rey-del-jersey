@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de administración · Rey del Jersey</title>
+</head>
+<body>
+  <!-- Incluye el widget de Netlify Identity para poder iniciar sesión -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+  <!-- Carga el CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <!-- Widget personalizado: botón "Autocompletar con IA" (debe cargarse DESPUÉS de decap-cms.js) -->
+  <script src="widget-jersey-ia.js"></script>
+</body>
+</html>

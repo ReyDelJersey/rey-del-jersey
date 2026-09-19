@@ -1,0 +1,520 @@
+{
+  "futbol": [
+    {
+      "nombre": "Bayern Munich 26/27 Local",
+      "precio": "$450",
+      "img": "7.jpeg",
+      "liga": "alemania",
+      "equipo": "Bayern Munich"
+    },
+    {
+      "nombre": "Bayern Munich 26/27 Visitante",
+      "precio": "$450",
+      "img": "31.jpeg",
+      "liga": "alemania",
+      "equipo": "Bayern Munich"
+    },
+    {
+      "nombre": "Borussia Dortmund 26/27 Visitante",
+      "precio": "$450",
+      "img": "32.jpeg",
+      "liga": "alemania",
+      "equipo": "Borussia Dortmund"
+    },
+    {
+      "nombre": "Boca Juniors 26/27 Local",
+      "precio": "$450",
+      "img": "42.jpeg",
+      "liga": "argentina",
+      "equipo": "Boca Juniors"
+    },
+    {
+      "nombre": "River Plate 26/27 Local",
+      "precio": "$450",
+      "img": "47.jpeg",
+      "liga": "argentina",
+      "equipo": "River Plate"
+    },
+    {
+      "nombre": "Santos 12/13 Local",
+      "precio": "$550",
+      "img": "56.jpeg",
+      "liga": "brasil",
+      "equipo": "Santos"
+    },
+    {
+      "nombre": "Barcelona 26/27 Local",
+      "precio": "$450",
+      "img": "15.jpeg",
+      "liga": "espana",
+      "equipo": "Barcelona"
+    },
+    {
+      "nombre": "Barcelona 26/27 Visitante",
+      "precio": "$450",
+      "img": "27.jpeg",
+      "liga": "espana",
+      "equipo": "Barcelona"
+    },
+    {
+      "nombre": "Real Madrid 26/27 Local",
+      "precio": "$450",
+      "img": "3.jpeg",
+      "liga": "espana",
+      "equipo": "Real Madrid"
+    },
+    {
+      "nombre": "Real Madrid 26/27 Visitante",
+      "precio": "$450",
+      "img": "4.jpeg",
+      "liga": "espana",
+      "equipo": "Real Madrid"
+    },
+    {
+      "nombre": "Barcelona 08/09 Local",
+      "precio": "$550",
+      "img": "39.jpeg",
+      "liga": "espana",
+      "equipo": "Barcelona"
+    },
+    {
+      "nombre": "Barcelona 11/12 Visitante",
+      "precio": "$550",
+      "img": "38.jpeg",
+      "liga": "espana",
+      "equipo": "Barcelona"
+    },
+    {
+      "nombre": "FC Barcelona 14/15 Local",
+      "precio": "$550",
+      "img": "5.jpeg",
+      "liga": "espana",
+      "equipo": "Barcelona"
+    },
+    {
+      "nombre": "Real Madrid 16/17 Local",
+      "precio": "$550",
+      "img": "41.jpeg",
+      "liga": "espana",
+      "equipo": "Real Madrid"
+    },
+    {
+      "nombre": "Real Madrid 17/18 Local",
+      "precio": "$450",
+      "img": "1.jpeg",
+      "liga": "espana",
+      "equipo": "Real Madrid"
+    },
+    {
+      "nombre": "Real Madrid 98/00 Local",
+      "precio": "$550",
+      "img": "40.jpeg",
+      "liga": "espana",
+      "equipo": "Real Madrid"
+    },
+    {
+      "nombre": "Real Madrid 98/00 Visitante",
+      "precio": "$550",
+      "img": "2.jpeg",
+      "liga": "espana",
+      "equipo": "Real Madrid"
+    },
+    {
+      "nombre": "PSG 26/27 Visitante",
+      "precio": "$450",
+      "img": "12.jpeg",
+      "liga": "francia",
+      "equipo": "PSG"
+    },
+    {
+      "nombre": "PSG 15/16 Alternativa",
+      "precio": "$550",
+      "img": "49.jpeg",
+      "liga": "francia",
+      "equipo": "PSG"
+    },
+    {
+      "nombre": "Ajax 26/27 Local",
+      "precio": "$450",
+      "img": "19.jpeg",
+      "liga": "holanda",
+      "equipo": "Ajax"
+    },
+    {
+      "nombre": "Ajax 26/27 Visitante",
+      "precio": "$450",
+      "img": "23.jpeg",
+      "liga": "holanda",
+      "equipo": "Ajax"
+    },
+    {
+      "nombre": "Arsenal 26/27 Alternativa",
+      "precio": "$450",
+      "img": "44.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Arsenal"
+    },
+    {
+      "nombre": "Arsenal 26/27 Local",
+      "precio": "$450",
+      "img": "30.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Arsenal"
+    },
+    {
+      "nombre": "Chelsea 26/27 Visitante",
+      "precio": "$450",
+      "img": "34.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Chelsea"
+    },
+    {
+      "nombre": "Liverpool 26/27 Visitante",
+      "precio": "$450",
+      "img": "20.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Liverpool"
+    },
+    {
+      "nombre": "Man City 26/27 Local",
+      "precio": "$450",
+      "img": "18.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Man City"
+    },
+    {
+      "nombre": "Man Utd 26/27 Local",
+      "precio": "$450",
+      "img": "48.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Man Utd"
+    },
+    {
+      "nombre": "Arsenal 05/06 Local",
+      "precio": "$550",
+      "img": "55.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Arsenal"
+    },
+    {
+      "nombre": "Chelsea 07/08 Local",
+      "precio": "$550",
+      "img": "53.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Chelsea"
+    },
+    {
+      "nombre": "Chelsea 13/14 Local",
+      "precio": "$550",
+      "img": "10.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Chelsea"
+    },
+    {
+      "nombre": "Liverpool 04/05 Local",
+      "precio": "$550",
+      "img": "51.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Liverpool"
+    },
+    {
+      "nombre": "Man Utd 07/08 Local",
+      "precio": "$550",
+      "img": "8.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Man Utd"
+    },
+    {
+      "nombre": "Man Utd 07/08 Visitante",
+      "precio": "$550",
+      "img": "59.jpeg",
+      "liga": "inglaterra",
+      "equipo": "Man Utd"
+    },
+    {
+      "nombre": "Juventus 26/27 Visitante",
+      "precio": "$450",
+      "img": "68.jpeg",
+      "liga": "italia",
+      "equipo": "Juventus"
+    },
+    {
+      "nombre": "Napoli 26/27 Local",
+      "precio": "$450",
+      "img": "22.jpeg",
+      "liga": "italia",
+      "equipo": "Napoli"
+    },
+    {
+      "nombre": "Roma 26/27 Local",
+      "precio": "$450",
+      "img": "33.jpeg",
+      "liga": "italia",
+      "equipo": "Roma"
+    },
+    {
+      "nombre": "AC Milan 06/07 Local",
+      "precio": "$550",
+      "img": "9.jpeg",
+      "liga": "italia",
+      "equipo": "AC Milan"
+    },
+    {
+      "nombre": "AC Milan 06/07 Visitante",
+      "precio": "$550",
+      "img": "52.jpeg",
+      "liga": "italia",
+      "equipo": "AC Milan"
+    },
+    {
+      "nombre": "Inter Milan 21/22 Visitante",
+      "precio": "$550",
+      "img": "50.jpeg",
+      "liga": "italia",
+      "equipo": "Inter Milan"
+    },
+    {
+      "nombre": "Juventus 19/20 Local",
+      "precio": "$550",
+      "img": "67.jpeg",
+      "liga": "italia",
+      "equipo": "Juventus"
+    },
+    {
+      "nombre": "América 26/27 Local",
+      "precio": "$450",
+      "img": "29.jpeg",
+      "liga": "mexico",
+      "equipo": "América"
+    },
+    {
+      "nombre": "Chivas 26/27 Local",
+      "precio": "$450",
+      "img": "14.jpeg",
+      "liga": "mexico",
+      "equipo": "Chivas"
+    },
+    {
+      "nombre": "Inter Miami 26/27 Alternativo",
+      "precio": "$450",
+      "img": "21.jpeg",
+      "liga": "mls",
+      "equipo": "Inter Miami"
+    },
+    {
+      "nombre": "Benfica 26/27 Local",
+      "precio": "$450",
+      "img": "45.jpeg",
+      "liga": "portugal",
+      "equipo": "Benfica"
+    },
+    {
+      "nombre": "Sporting Lisboa 02/03 Local",
+      "precio": "$550",
+      "img": "65.jpeg",
+      "liga": "portugal",
+      "equipo": "Sporting Lisboa"
+    },
+    {
+      "nombre": "Sporting Lisboa 26/27 Local",
+      "precio": "$550",
+      "img": "66.jpeg",
+      "liga": "portugal",
+      "equipo": "Sporting Lisboa"
+    },
+    {
+      "nombre": "Argentina 26´ Visitante",
+      "precio": "$450",
+      "img": "13.jpeg",
+      "liga": "selecciones",
+      "equipo": "Argentina"
+    },
+    {
+      "nombre": "España 26´ Visitante",
+      "precio": "$450",
+      "img": "11.jpeg",
+      "liga": "selecciones",
+      "equipo": "España"
+    },
+    {
+      "nombre": "Francia 26´ Local",
+      "precio": "$450",
+      "img": "17.jpeg",
+      "liga": "selecciones",
+      "equipo": "Francia"
+    },
+    {
+      "nombre": "Holanda 26´ Visitante",
+      "precio": "$450",
+      "img": "25.jpeg",
+      "liga": "selecciones",
+      "equipo": "Holanda"
+    },
+    {
+      "nombre": "Inglaterra 26´ Local",
+      "precio": "$450",
+      "img": "16.jpeg",
+      "liga": "selecciones",
+      "equipo": "Inglaterra"
+    },
+    {
+      "nombre": "México 26/27 Visitante",
+      "precio": "$450",
+      "img": "46.jpeg",
+      "liga": "selecciones",
+      "equipo": "México"
+    },
+    {
+      "nombre": "Noruega 26´ Local",
+      "precio": "$450",
+      "img": "24.jpeg",
+      "liga": "selecciones",
+      "equipo": "Noruega"
+    },
+    {
+      "nombre": "Noruega 26´ Visitante",
+      "precio": "$450",
+      "img": "26.jpeg",
+      "liga": "selecciones",
+      "equipo": "Noruega"
+    },
+    {
+      "nombre": "Portugal 26/27 Local",
+      "precio": "$450",
+      "img": "28.jpeg",
+      "liga": "selecciones",
+      "equipo": "Portugal"
+    },
+    {
+      "nombre": "Alemania 14´ Local",
+      "precio": "$550",
+      "img": "60.jpeg",
+      "liga": "selecciones",
+      "equipo": "Alemania"
+    },
+    {
+      "nombre": "Alemania 22´ Local",
+      "precio": "$550",
+      "img": "61.jpeg",
+      "liga": "selecciones",
+      "equipo": "Alemania"
+    },
+    {
+      "nombre": "Argentina 06´ Local",
+      "precio": "$550",
+      "img": "62.jpeg",
+      "liga": "selecciones",
+      "equipo": "Argentina"
+    },
+    {
+      "nombre": "Argentina 14´ Visitante",
+      "precio": "$550",
+      "img": "63.jpeg",
+      "liga": "selecciones",
+      "equipo": "Argentina"
+    },
+    {
+      "nombre": "Brasil 04´ Local",
+      "precio": "$550",
+      "img": "58.jpeg",
+      "liga": "selecciones",
+      "equipo": "Brasil"
+    },
+    {
+      "nombre": "Brasil 98´ Local",
+      "precio": "$550",
+      "img": "6.jpeg",
+      "liga": "selecciones",
+      "equipo": "Brasil"
+    },
+    {
+      "nombre": "España 10´ Visitante",
+      "precio": "$550",
+      "img": "57.jpeg",
+      "liga": "selecciones",
+      "equipo": "España"
+    },
+    {
+      "nombre": "Francia 06´ Visitante",
+      "precio": "$550",
+      "img": "36.jpeg",
+      "liga": "selecciones",
+      "equipo": "Francia"
+    },
+    {
+      "nombre": "Francia 98´ Local",
+      "precio": "$550",
+      "img": "35.jpeg",
+      "liga": "selecciones",
+      "equipo": "Francia"
+    },
+    {
+      "nombre": "México 14´ Local",
+      "precio": "$550",
+      "img": "64.jpeg",
+      "liga": "selecciones",
+      "equipo": "México"
+    },
+    {
+      "nombre": "Portugal 06´ Local",
+      "precio": "$550",
+      "img": "54.jpeg",
+      "liga": "selecciones",
+      "equipo": "Portugal"
+    },
+    {
+      "nombre": "Portugal 18´ Local",
+      "precio": "$550",
+      "img": "37.jpeg",
+      "liga": "selecciones",
+      "equipo": "Portugal"
+    },
+    {
+      "nombre": "Olympiakos 26/27 Local",
+      "precio": "$450",
+      "img": "43.jpeg",
+      "liga": "otras",
+      "equipo": "Olympiakos"
+    }
+  ],
+  "f1": [
+    {
+      "nombre": "Ferrari 2026 Oficial",
+      "precio": "$550",
+      "img": "f1-1.jpeg",
+      "equipo": "ferrari"
+    },
+    {
+      "nombre": "McLaren 2026 Oficial",
+      "precio": "$550",
+      "img": "f1-3.jpeg",
+      "equipo": "mclaren"
+    },
+    {
+      "nombre": "Red Bull Racing 2026",
+      "precio": "$550",
+      "img": "f1-2.jpeg",
+      "equipo": "red_bull"
+    }
+  ],
+  "nba": [
+    {
+      "nombre": "Bulls Jordan Retro 96/97",
+      "precio": "$650",
+      "img": "nba-3.jpeg",
+      "equipo": "bulls"
+    },
+    {
+      "nombre": "Lakers LeBron James Icon",
+      "precio": "$650",
+      "img": "nba-1.jpeg",
+      "equipo": "lakers"
+    },
+    {
+      "nombre": "Warriors Curry Statement",
+      "precio": "$650",
+      "img": "nba-2.jpeg",
+      "equipo": "warriors"
+    }
+  ]
+}

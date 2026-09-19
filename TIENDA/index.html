@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rey del Jersey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --paper: #F8F4EC;
+        --white: #FFFFFF;
+        --ink: #181A20;
+        --navy: #1B2436;
+        --line: #E4E0D3;
+        --muted: #8A8577;
+        --rebaja: #9C4A3B;
+        --navy-tint: rgba(27,36,54,0.07);
+        /* Para una foto real en el hero (estilo boutique), sube una imagen
+           (p. ej. hero.jpg) y descomenta la línea de abajo con su ruta: */
+        --hero-photo: none;
+        /* --hero-photo: url('hero.jpg'); */
+        --font-display: 'Bebas Neue', sans-serif;
+        --font-body: 'Manrope', sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+        --font-editorial: 'Fraunces', serif;
+
+        /* Identidad por categoría: la superficie donde se juega cada deporte */
+        --acento-futbol: #2F4A3E;              /* verde botella — la cancha */
+        --acento-futbol-tint: rgba(47,74,62,0.10);
+        --acento-futbol-tint-strong: rgba(47,74,62,0.22);
+        --acento-f1: #1E3A4C;                  /* azul petróleo — el asfalto */
+        --acento-f1-tint: rgba(30,58,76,0.10);
+        --acento-f1-tint-strong: rgba(30,58,76,0.22);
+        --acento-f1-detalle: #D69A44;          /* ámbar — luces de pit lane */
+        --acento-nba: #A6612E;                 /* terracota — el parqué */
+        --acento-nba-tint: rgba(166,97,46,0.10);
+        --acento-nba-tint-strong: rgba(166,97,46,0.22);
+
+        --acento: var(--acento-futbol);
+        --acento-tint: var(--acento-futbol-tint);
+        --hero-tint: var(--acento-futbol-tint-strong);
+
+        --whatsapp: #25D366;
+
+        /* Curvas que aproximan un spring críticamente amortiguado (sin rebote) */
+        --spring: cubic-bezier(0.16, 1, 0.3, 1);
+        --spring-snappy: cubic-bezier(0.22, 1, 0.36, 1);
+        /* Únicamente para interacciones con momentum real (drag/flick), leve rebote */
+        --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    body.dark {
+        --paper: #14161C;
+        --white: #1C1F28;
+        --ink: #F2F1EC;
+        --line: #2C2F3A;
+        --muted: #9A97A0;
+        --navy-tint: rgba(255,255,255,0.06);
+        --rebaja: #C97060;
+
+        /* En fondo oscuro, las mismas identidades se aclaran para mantener el contraste */
+        --acento-futbol: #6FA187;
+        --acento-futbol-tint: rgba(111,161,135,0.16);
+        --acento-futbol-tint-strong: rgba(111,161,135,0.26);
+        --acento-f1: #5B93B0;
+        --acento-f1-tint: rgba(91,147,176,0.16);
+        --acento-f1-tint-strong: rgba(91,147,176,0.26);
+        --acento-f1-detalle: #E3AC5C;
+        --acento-nba: #D9974F;
+        --acento-nba-tint: rgba(217,151,79,0.16);
+        --acento-nba-tint-strong: rgba(217,151,79,0.26);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        position: relative;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+        /* Transición suave para el cambio de tema, sin saltos bruscos de brillo */
+        transition: background 0.4s var(--spring), color 0.4s var(--spring);
+        overflow-x: hidden;
+    }
+
+    /* Feedback táctil consistente: todo lo que se puede presionar responde igual */
+    button, a.fab-instagram, a.fab-whatsapp, .item {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    button:active,
+    a.fab-instagram:active,
+    a.fab-whatsapp:active {
+        transform: scale(0.94);
+    }
+
+    .container { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- DEGRADADO DE INICIO ---------- */
+    /* Vive detrás del header y las categorías; se disuelve hacia --paper conforme baja */
+
+    /* ---------- FRANJA DE ENVIOS ---------- */
+
+    .franja-envios {
+        background: var(--navy);
+        color: var(--paper);
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 8px 10px;
+    }
+
+    body.dark .franja-envios { background: #0A0D1A; }
+
+    /* ---------- HERO: bloque navy sólido (reemplaza el glow decorativo) ---------- */
+
+    .hero-band {
+        position: relative;
+        background-color: var(--paper);
+        background-image: radial-gradient(120% 100% at 50% 0%, var(--hero-tint, var(--acento-tint)) 0%, transparent 65%), var(--hero-photo, none);
+        background-size: cover;
+        background-position: center 30%;
+        transition: background 0.5s var(--spring), padding 0.5s var(--spring);
+    }
+
+    .hero-band header { padding-left: 0; padding-right: 0; }
+
+    .hero-editorial {
+        font-family: var(--font-editorial);
+        font-style: italic;
+        font-weight: 500;
+        font-size: 1.05rem;
+        color: var(--ink);
+        opacity: 0.82;
+        margin-top: 2px;
+        animation: heroEntrada 0.7s var(--spring) both;
+        animation-delay: 0.05s;
+    }
+
+    .hero-band .handle { color: var(--muted); }
+
+    .hero-band .kickoff-line .bar { background: var(--line); }
+    .hero-band .kickoff-line .dot { background: var(--acento); }
+
+    .hero-desc {
+        max-width: 380px;
+        margin: 16px auto 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        max-height: 60px;
+        opacity: 1;
+        overflow: hidden;
+        transition: opacity 0.35s var(--spring), max-height 0.4s var(--spring), margin 0.4s var(--spring);
+    }
+
+    body.is-scrolled .hero-desc {
+        opacity: 0;
+        max-height: 0;
+        margin-top: 0;
+    }
+
+    .hero-promo {
+        display: inline-block;
+        margin-top: 22px;
+        padding: 8px 20px;
+        border-radius: 6px;
+        background: var(--rebaja);
+        color: var(--paper);
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        box-shadow: 0 6px 18px rgba(156,74,59,0.4);
+        animation: heroEntrada 0.7s var(--spring) both;
+        animation-delay: 0.12s;
+    }
+
+    .hero-cta {
+        display: inline-block;
+        margin-top: 28px;
+        padding: 14px 30px;
+        border-radius: 10px;
+        background: var(--acento);
+        color: var(--paper);
+        font-family: var(--font-body);
+        font-weight: 700;
+        font-size: 0.92rem;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s var(--spring), background 0.2s var(--spring), opacity 0.35s var(--spring), max-height 0.4s var(--spring), margin 0.4s var(--spring);
+    }
+
+    .hero-cta:hover { transform: translateY(-2px); }
+    .hero-cta:active { transform: translateY(0) scale(0.97); }
+
+    body.is-scrolled .hero-cta {
+        opacity: 0;
+        max-height: 0;
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .hero-nota {
+        margin-top: 16px;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        max-height: 20px;
+        opacity: 1;
+        overflow: hidden;
+        transition: opacity 0.35s var(--spring), max-height 0.4s var(--spring), margin 0.4s var(--spring);
+    }
+
+    body.is-scrolled .hero-nota {
+        opacity: 0;
+        max-height: 0;
+        margin-top: 0;
+    }
+
+    /* ---------- MODO OSCURO: BOTON ---------- */
+    /* Posición, tamaño y z-index vienen de la base compartida (.fab-whatsapp, .fab-dark, .fab-instagram) */
+
+    .fab-dark {
+        right: 76px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        /* Material translúcido en vez de blanco sólido: se siente como una capa flotante */
+        background: rgba(255,255,255,0.72);
+        backdrop-filter: blur(14px) saturate(180%);
+        -webkit-backdrop-filter: blur(14px) saturate(180%);
+        color: var(--ink);
+        border: 1px solid rgba(255,255,255,0.5);
+        cursor: pointer;
+        font-size: 1.15rem;
+    }
+
+    body.dark .fab-dark {
+        background: rgba(28,31,40,0.72);
+        border-color: rgba(255,255,255,0.12);
+    }
+
+    .fab-dark:hover { transform: scale(1.08); }
+    .fab-dark:active { transform: scale(0.9); }
+
+    @media (max-width: 640px) {
+        .fab-dark { right: 66px; }
+    }
+
+    /* ---------- HEADER ---------- */
+
+    header {
+        text-align: center;
+        padding: 88px 20px 36px;
+        transition: padding 0.5s var(--spring);
+        animation: heroEntrada 0.7s var(--spring) both;
+    }
+
+    body.is-scrolled header {
+        padding: 30px 20px 20px;
+    }
+
+    .logo {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        margin-bottom: 22px;
+        transition: width 0.5s var(--spring), height 0.5s var(--spring), margin 0.5s var(--spring);
+    }
+
+    body.is-scrolled .logo {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 14px;
+    }
+
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 14px;
+        max-height: 40px;
+        opacity: 1;
+        transition: opacity 0.35s var(--spring), max-height 0.4s var(--spring), margin 0.4s var(--spring);
+    }
+
+    body.is-scrolled .eyebrow {
+        opacity: 0;
+        max-height: 0;
+        margin-bottom: 0;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: clamp(3.6rem, 12vw, 7.2rem);
+        /* Texto grande: tracking negativo, se ve apretado y a propósito */
+        letter-spacing: -0.01em;
+        line-height: 0.92;
+        color: var(--ink);
+        font-optical-sizing: auto;
+        transition: font-size 0.5s var(--spring);
+    }
+
+    body.is-scrolled h1 {
+        font-size: clamp(2.4rem, 6vw, 3.4rem);
+    }
+
+    h1 .acento { color: var(--acento); transition: color 0.4s var(--spring); }
+
+    .handle {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 10px;
+        max-height: 30px;
+        opacity: 1;
+        transition: opacity 0.35s var(--spring), max-height 0.4s var(--spring), margin 0.4s var(--spring);
+    }
+
+    body.is-scrolled .handle {
+        opacity: 0;
+        max-height: 0;
+        margin-top: 0;
+        overflow: hidden;
+    }
+
+    @keyframes heroEntrada {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Linea de medio campo: firma visual futbolera, contenida */
+    .kickoff-line {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        max-width: 340px;
+        margin: 30px auto 0;
+        opacity: 1;
+        max-height: 20px;
+        overflow: hidden;
+        transition: opacity 0.35s var(--spring), max-height 0.4s var(--spring), margin 0.4s var(--spring);
+    }
+
+    body.is-scrolled .kickoff-line {
+        opacity: 0;
+        max-height: 0;
+        margin-top: 0;
+    }
+
+    .kickoff-line .bar {
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+    }
+
+    .kickoff-line .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--navy);
+    }
+
+    /* ---------- FILTROS ---------- */
+
+    .filtros {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 40px 0 44px;
+    }
+
+    .filtro {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: 11px 24px;
+        border: 1.5px solid var(--ink);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        transition: background 0.25s var(--spring), color 0.25s var(--spring), border-color 0.25s var(--spring), transform 0.15s var(--spring);
+    }
+
+    .filtro:hover { background: var(--acento-tint); border-color: var(--acento); color: var(--acento); }
+    .filtro:active { transform: scale(0.95); }
+
+    .filtro.active {
+        background: var(--acento, var(--navy));
+        border-color: var(--acento, var(--navy));
+        color: var(--paper);
+    }
+
+    /* ---------- TARJETAS DE CATEGORÍA (bienvenida: ¿qué quieres ver?) ---------- */
+    /* Cada categoría es un póster con la superficie de su deporte: */
+    /* cancha (fútbol), asfalto de pit lane (F1), parqué (NBA)      */
+
+    .categorias-wrap {
+        margin: 8px 0 34px;
+        text-align: center;
+        animation: heroEntrada 0.7s var(--spring) both;
+        animation-delay: 0.1s;
+    }
+
+    .categorias-titulo {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .titulo-guion {
+        display: block;
+        width: 28px;
+        height: 2px;
+        background: var(--acento, var(--muted));
+        margin: 10px auto 24px;
+    }
+
+    .categorias-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        transition: gap 0.5s var(--spring);
+    }
+
+    body.is-scrolled .categorias-grid {
+        gap: 16px;
+    }
+
+    .categoria-card {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 4px;
+        min-height: 118px;
+        padding: 15px 16px 17px;
+        border: none;
+        border-radius: 22px;
+        text-align: left;
+        cursor: pointer;
+        color: var(--paper);
+        /* Inactiva: se ve pero apagada; activa: cobra vida a todo color */
+        filter: saturate(0.65) brightness(0.9);
+        box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+        opacity: 0;
+        animation: riseIn 0.6s var(--spring) forwards;
+        transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), filter 0.35s var(--spring),
+                    min-height 0.5s var(--spring), padding 0.5s var(--spring), border-radius 0.5s var(--spring);
+    }
+
+    .categoria-card:nth-child(1) { animation-delay: 0.05s; }
+    .categoria-card:nth-child(2) { animation-delay: 0.15s; }
+    .categoria-card:nth-child(3) { animation-delay: 0.25s; }
+
+    body.is-scrolled .categoria-card {
+        min-height: 190px;
+        padding: 22px 22px 24px;
+        border-radius: 26px;
+    }
+
+    .categoria-card[data-categoria="futbol"] { background: linear-gradient(155deg, var(--acento-futbol) 0%, rgba(0,0,0,0.32) 165%); }
+    .categoria-card[data-categoria="f1"]     { background: linear-gradient(155deg, var(--acento-f1) 0%, rgba(0,0,0,0.32) 165%); }
+    .categoria-card[data-categoria="nba"]    { background: linear-gradient(155deg, var(--acento-nba) 0%, rgba(0,0,0,0.32) 165%); }
+
+    /* Logo de fondo: la firma visual de cada póster */
+    .categoria-card::after {
+        content: '';
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        background-color: rgba(255,255,255,0.94);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 70%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        pointer-events: none;
+        transition: width 0.5s var(--spring), height 0.5s var(--spring);
+    }
+    .categoria-card[data-categoria="futbol"]::after { background-image: url('futbol-balon.png'); }
+    .categoria-card[data-categoria="f1"]::after     { background-image: url('f1-logo.png'); background-size: 62%; }
+    .categoria-card[data-categoria="nba"]::after    { background-image: url('nba-logo.png'); background-size: 56%; }
+
+    .categoria-card:hover {
+        transform: translateY(-4px);
+        filter: saturate(0.85) brightness(0.95);
+    }
+
+    .categoria-card:active { transform: translateY(-1px) scale(0.97); }
+
+    .categoria-card.active {
+        filter: saturate(1) brightness(1.02);
+        box-shadow: 0 16px 32px rgba(0,0,0,0.24), 0 0 0 2.5px var(--paper);
+        transform: translateY(-4px);
+    }
+
+    .categoria-icono {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+        z-index: 1;
+        background: rgba(255,255,255,0.92);
+        border-radius: 50%;
+        padding: 4px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        transition: width 0.5s var(--spring), height 0.5s var(--spring);
+    }
+
+    body.is-scrolled .categoria-icono { width: 34px; height: 34px; }
+
+    .categoria-nombre {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: clamp(1.3rem, 3.2vw, 1.7rem);
+        letter-spacing: -0.01em;
+        line-height: 0.95;
+        text-transform: uppercase;
+        color: var(--paper);
+        z-index: 1;
+        transition: font-size 0.5s var(--spring);
+    }
+
+    body.is-scrolled .categoria-nombre { font-size: clamp(1.7rem, 4vw, 2.3rem); }
+
+    .categoria-desc {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.78);
+        z-index: 1;
+    }
+
+    @media (max-width: 640px) {
+        .categorias-grid { grid-template-columns: 1fr; gap: 8px; }
+        body.is-scrolled .categorias-grid { gap: 12px; }
+        .categoria-card { min-height: 76px; flex-direction: row; align-items: center; justify-content: flex-start; gap: 14px; padding: 0 20px; }
+        body.is-scrolled .categoria-card { min-height: 108px; }
+        .categoria-icono { width: 30px; height: 30px; }
+        body.is-scrolled .categoria-icono { width: 38px; height: 38px; }
+        .categoria-nombre { font-size: 1.1rem; }
+        body.is-scrolled .categoria-nombre { font-size: 1.5rem; }
+        .categoria-card::after { width: 40px; height: 40px; right: 12px; bottom: auto; top: 50%; transform: translateY(-50%); }
+        body.is-scrolled .categoria-card::after { width: 48px; height: 48px; }
+    }
+
+    /* ---------- BANDA DE SECCIÓN ACTIVA ---------- */
+    /* El escalón medio de la pirámide: confirma qué elegiste antes de mostrar el grid */
+
+    .seccion-activa {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 4px 0 26px;
+        padding: 16px 22px;
+        border-radius: 16px;
+        background: var(--acento);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transition: background 0.4s var(--spring);
+    }
+
+    .seccion-icono {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+        background: rgba(255,255,255,0.92);
+        border-radius: 50%;
+        padding: 6px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .seccion-nombre {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        color: var(--paper);
+        line-height: 1;
+    }
+
+    .seccion-desc {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+        color: rgba(255,255,255,0.8);
+        margin-top: 4px;
+    }
+
+    @media (max-width: 640px) {
+        .seccion-activa { padding: 13px 18px; gap: 10px; }
+        .seccion-nombre { font-size: 1.05rem; }
+    }
+
+    /* ---------- BOTONES FLOTANTES (WhatsApp, modo oscuro, Instagram) ---------- */
+    /* Base compartida: mismo tamaño, misma sombra, mismo comportamiento */
+
+    .fab-whatsapp, .fab-dark, .fab-instagram {
+        position: fixed;
+        bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        /* Muy por encima de cualquier badge externo (ej. "Powered by Netlify") */
+        z-index: 99999;
+        transition: transform 0.3s var(--spring), opacity 0.25s var(--spring);
+    }
+
+    .fab-whatsapp {
+        right: 132px;
+        background: var(--whatsapp);
+        color: #fff;
+        opacity: 0.92;
+    }
+
+    .fab-whatsapp:hover { transform: scale(1.08); opacity: 1; }
+    .fab-whatsapp:active { transform: scale(0.9); }
+
+    .fab-instagram {
+        right: 20px;
+        background: var(--navy);
+        color: #fff;
+        opacity: 0.85;
+    }
+
+    .fab-instagram:hover { transform: scale(1.08); opacity: 1; }
+    .fab-instagram:active { transform: scale(0.9); }
+
+    @media (max-width: 640px) {
+        /* Elevadas por encima de la franja donde suelen vivir los badges de hosting */
+        .fab-whatsapp, .fab-dark, .fab-instagram {
+            width: 44px;
+            height: 44px;
+            bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+        }
+        .fab-instagram { right: 14px; }
+        .fab-whatsapp { right: 122px; }
+        .fab-dark { right: 66px; }
+    }
+
+    /* ---------- SUBFILTROS (selector de liga/equipo dentro de cada sección) ---------- */
+
+    .filtros-sub {
+        margin: -22px 0 44px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .filtro-select {
+        appearance: none;
+        -webkit-appearance: none;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--ink);
+        background: var(--white);
+        border: 1.5px solid var(--line);
+        border-radius: 8px;
+        padding: 9px 34px 9px 16px;
+        cursor: pointer;
+        transition: border-color 0.2s var(--spring), color 0.2s var(--spring);
+        background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+        background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+        background-size: 5px 5px, 5px 5px;
+        background-repeat: no-repeat;
+        max-width: 90vw;
+    }
+
+    .filtro-select:hover, .filtro-select:focus {
+        border-color: var(--acento);
+        color: var(--acento);
+        outline: none;
+    }
+
+    /* ---------- BUSCADOR ---------- */
+
+    .buscador-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 0 0 28px;
+    }
+
+    .buscador {
+        width: 100%;
+        max-width: 420px;
+        padding: 12px 18px;
+        border: 1.5px solid var(--ink);
+        border-radius: 999px;
+        background: var(--white);
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        color: var(--ink);
+        outline: none;
+        transition: border-color 0.25s var(--spring), box-shadow 0.25s var(--spring);
+    }
+
+    .buscador::placeholder { color: var(--muted); }
+
+    .buscador:focus {
+        border-color: var(--acento);
+        box-shadow: 0 0 0 3px var(--acento-tint);
+    }
+
+    .sin-resultados {
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--muted);
+        padding: 40px 0 60px;
+    }
+
+    /* ---------- GRID DE PRODUCTOS ---------- */
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 26px;
+        padding-bottom: 80px;
+    }
+
+    .item {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), border-color 0.35s var(--spring);
+        opacity: 0;
+        animation: riseIn 0.6s var(--spring) forwards;
+    }
+
+    .item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 30px rgba(0,0,0,0.14);
+        border-color: var(--acento);
+    }
+
+    .item:active { transform: translateY(-2px) scale(0.98); }
+
+    @keyframes riseIn {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .item-img-wrap {
+        position: relative;
+        aspect-ratio: 3 / 4;
+        overflow: hidden;
+        background: var(--paper);
+    }
+
+    .item-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .item-vista {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 10px 0;
+        text-align: center;
+        background: linear-gradient(0deg, rgba(24,26,32,0.82) 0%, transparent 100%);
+        color: var(--paper);
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform 0.35s var(--spring), opacity 0.35s var(--spring);
+        pointer-events: none;
+    }
+
+    .item:hover .item-vista {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .squad-tag {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--acento, rgba(16,27,61,0.88));
+        color: var(--paper);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.06em;
+        padding: 3px 8px;
+        border-radius: 2px;
+    }
+
+    .bestseller-tag {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        background: var(--rebaja);
+        color: var(--paper);
+        font-family: var(--font-mono);
+        font-weight: 600;
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 10px 4px 12px;
+        border-radius: 2px 0 0 2px;
+        z-index: 2;
+    }
+
+    /* Cuando hay bestseller, el corazón de favoritos baja para no chocar con la cinta */
+    .item-img-wrap:has(.bestseller-tag) .fav-btn {
+        top: 40px;
+    }
+
+    .fav-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255,255,255,0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        cursor: pointer;
+        z-index: 2;
+        transition: transform 0.2s var(--spring-bounce), color 0.2s var(--spring);
+    }
+
+    .fav-btn:hover { transform: scale(1.12); }
+    .fav-btn:active { transform: scale(0.85); }
+    .fav-btn.activo { color: var(--rebaja); transform: scale(1.15); }
+    .fav-btn:not(.activo) { color: var(--muted); }
+
+    .item-info { padding: 16px 15px 20px; }
+
+    .nombre {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        line-height: 1.1;
+        color: var(--ink);
+        margin-bottom: 12px;
+        min-height: 2.2em;
+    }
+
+    .precio-wrap {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+    }
+
+    .precio-anterior {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--rebaja);
+        text-decoration: line-through;
+        text-decoration-thickness: 1.5px;
+        opacity: 0.85;
+    }
+
+    .precio {
+        font-family: var(--font-mono);
+        font-weight: 800;
+        font-size: 1.4rem;
+        color: var(--acento, var(--navy));
+    }
+
+    .item-info-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .compartir-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 6px 10px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: border-color 0.2s var(--spring), color 0.2s var(--spring), transform 0.15s var(--spring);
+    }
+
+    .compartir-btn:hover { border-color: var(--acento, var(--navy)); color: var(--acento, var(--navy)); }
+    .compartir-btn:active { transform: scale(0.94); }
+
+    /* ---------- MODAL ---------- */
+
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(11,13,20,0.94);
+        backdrop-filter: blur(3px);
+        z-index: 100000;
+    }
+
+    .modal.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        animation: modalMaterialize 0.35s var(--spring);
+    }
+
+    @keyframes modalMaterialize {
+        from { opacity: 0; backdrop-filter: blur(0px); }
+        to { opacity: 1; backdrop-filter: blur(3px); }
+    }
+
+    .modal.active .modal-content {
+        animation: modalContentIn 0.35s var(--spring);
+    }
+
+    @keyframes modalContentIn {
+        from { opacity: 0; transform: scale(0.92); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 68vh;
+        overflow: hidden;
+        touch-action: none;
+    }
+
+    .modal-content img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        cursor: zoom-in;
+        transform-origin: center center;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    .modal-content img.zoomed { cursor: grab; }
+    .modal-content img.dragging { cursor: grabbing; }
+
+    .zoom-controls {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+    }
+
+    .zoom-controls button {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.45);
+        background: rgba(11,13,20,0.35);
+        color: var(--paper);
+        font-family: var(--font-mono);
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background 0.2s var(--spring), border-color 0.2s var(--spring), transform 0.15s var(--spring);
+    }
+
+    .zoom-controls button:hover {
+        background: rgba(255,255,255,0.16);
+        border-color: #fff;
+    }
+
+    .zoom-controls button:active { transform: scale(0.88); }
+
+    .close-btn {
+        position: absolute;
+        top: 22px;
+        right: 26px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.4);
+        background: transparent;
+        font-size: 22px;
+        font-family: var(--font-mono);
+        color: var(--paper);
+        cursor: pointer;
+        transition: border-color 0.2s var(--spring), background 0.2s var(--spring), transform 0.15s var(--spring);
+    }
+
+    .close-btn:hover {
+        border-color: #fff;
+        background: rgba(255,255,255,0.1);
+    }
+
+    .close-btn:active { transform: scale(0.88); }
+
+    .modal-info {
+        color: var(--paper);
+        text-align: center;
+        margin-top: 26px;
+    }
+
+    .modal-info .nombre {
+        color: var(--paper);
+        font-size: 1.7rem;
+        min-height: 0;
+        margin-bottom: 12px;
+    }
+
+    .modal-info .precio-wrap { justify-content: center; }
+
+    .modal-info .precio { font-size: 1.6rem; color: var(--paper); }
+
+    .modal-info .precio-anterior { font-size: 1rem; }
+
+    /* ---------- TABS DEL MODAL (Foto / Info de pedido) ---------- */
+
+    .modal-panel {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .modal-panel.active { display: flex; }
+
+    #panelInfoPedido { max-width: 480px; }
+
+    .modal-tabs {
+        display: flex;
+        gap: 6px;
+        margin-top: 22px;
+        background: rgba(255,255,255,0.12);
+        border: 1.5px solid rgba(255,255,255,0.35);
+        border-radius: 999px;
+        padding: 5px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+
+    .modal-tab {
+        border: none;
+        background: transparent;
+        color: rgba(247,245,240,0.9);
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 11px 24px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.25s var(--spring), color 0.25s var(--spring), transform 0.15s var(--spring);
+    }
+
+    .modal-tab:active { transform: scale(0.96); }
+
+    .modal-tab.active {
+        background: var(--acento);
+        color: var(--paper);
+        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    }
+
+    #panelInfoPedido {
+        max-height: 62vh;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .info-pedido-scroll {
+        max-height: 62vh;
+        overflow-y: auto;
+        padding: 4px 6px 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .info-pedido-bloque { margin-bottom: 28px; }
+
+    .info-pedido-titulo {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        color: var(--paper);
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .info-pedido-lista {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .info-pedido-lista li {
+        font-family: var(--font-body);
+        font-size: 0.92rem;
+        line-height: 1.5;
+        color: rgba(247,245,240,0.85);
+    }
+
+    .tabla-tallas {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--paper);
+    }
+
+    .tabla-tallas th, .tabla-tallas td {
+        border: 1px solid rgba(255,255,255,0.18);
+        padding: 8px 6px;
+        text-align: center;
+    }
+
+    .tabla-tallas thead th {
+        background: rgba(255,255,255,0.1);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 0.68rem;
+    }
+
+    .tabla-tallas tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+    .zoom-hint {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(247,245,240,0.5);
+        margin-top: 16px;
+    }
+
+    /* ---------- COMO COMPRAR ---------- */
+    /* Banda oscura de ancho completo: el remate contundente antes del footer */
+
+    .como-comprar-wrap {
+        background: var(--navy);
+        margin-top: 30px;
+        padding: 54px 0 58px;
+    }
+
+    .como-comprar-titulo {
+        text-align: center;
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 5vw, 2.6rem);
+        letter-spacing: -0.005em;
+        color: var(--paper);
+        margin-bottom: 34px;
+    }
+
+    .pasos-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 780px;
+        margin: 0 auto;
+    }
+
+    .paso {
+        text-align: center;
+    }
+
+    .paso-numero {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--acento);
+        color: var(--paper);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 14px;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 0.95rem;
+        transition: background 0.4s var(--spring);
+    }
+
+    .paso-titulo {
+        font-weight: 700;
+        margin-bottom: 6px;
+        font-size: 1rem;
+        color: var(--paper);
+    }
+
+    .paso-desc {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: rgba(247,245,240,0.62);
+        line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+        .pasos-grid { grid-template-columns: 1fr; gap: 26px; }
+        .como-comprar-wrap { padding: 44px 0 48px; }
+    }
+
+    /* ---------- FOOTER ---------- */
+
+    footer {
+        text-align: center;
+        padding: 30px 20px 50px;
+        border-top: 1px solid var(--line);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 980px) {
+        .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+        header { padding: 48px 16px 28px; }
+        .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .nombre { font-size: 1rem; }
+        .precio { font-size: 1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+        .fab-dark {
+            background: var(--white);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+        .modal { backdrop-filter: none; background: rgba(11,13,20,0.97); }
+    }
+</style>
+</head>
+<body>
+    <div class="franja-envios">🚚 Envíos a todo México</div>
+
+    <a class="fab-whatsapp" href="https://wa.me/523111028778" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.45 1.27 4.91L2 22l5.25-1.38a9.96 9.96 0 0 0 4.79 1.22h.01c5.52 0 10-4.48 10-10s-4.48-10-10.01-10zm.01 18.15h-.01a8.14 8.14 0 0 1-4.15-1.14l-.3-.18-3.11.82.83-3.03-.19-.31a8.14 8.14 0 0 1-1.26-4.31c0-4.5 3.66-8.16 8.17-8.16 2.18 0 4.23.85 5.77 2.39a8.1 8.1 0 0 1 2.39 5.78c0 4.5-3.67 8.14-8.14 8.14zm4.47-6.1c-.24-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.78.97-.14.16-.29.18-.53.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.11-.49.11-.11.24-.29.36-.43.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.43-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42-.14-.01-.3-.01-.46-.01a.9.9 0 0 0-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z"/></svg>
+    </a>
+
+    <button class="fab-dark" id="btnModoOscuro" aria-label="Modo oscuro" onclick="alternarModoOscuro()">🌙</button>
+
+    <a class="fab-instagram" href="https://instagram.com/reydeljersey_" target="_blank" rel="noopener" aria-label="Comprar por Instagram">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153a4.9 4.9 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122s-.01 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.9 4.9 0 0 1-1.153 1.772 4.9 4.9 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06s-3.056-.01-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.9 4.9 0 0 1-1.772-1.153 4.9 4.9 0 0 1-1.153-1.772c-.247-.637-.415-1.363-.465-2.428C2.01 15.056 2 14.717 2 12s.01-3.056.06-4.122c.05-1.065.218-1.79.465-2.428a4.9 4.9 0 0 1 1.153-1.772A4.9 4.9 0 0 1 5.45 2.525c.637-.248 1.363-.415 2.428-.465C8.944 2.01 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5zM17.5 6.75a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0z"/></svg>
+    </a>
+    <div class="hero-band">
+        <div class="container">
+            <header>
+                <img src="logo.png" alt="Rey del Jersey" class="logo">
+                <h1>Rey <span class="acento">del</span> Jersey</h1>
+                <div class="hero-editorial">Tu tienda de confianza</div>
+                <div class="handle">@reydeljersey_</div>
+                <div class="kickoff-line">
+                    <span class="bar"></span>
+                    <span class="dot"></span>
+                    <span class="bar"></span>
+                </div>
+                <p class="hero-desc">Fútbol, F1 y NBA — con envíos a todo México.</p>
+                <div class="hero-promo">Rebajas de inauguración</div><br>
+                <a href="#catalogo" class="hero-cta">Ver catálogo</a>
+                <div class="hero-nota">✔ Calidad verificada · Envíos a todo México</div>
+            </header>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="categorias-wrap" id="catalogo">
+            <div class="categorias-titulo">¿Qué quieres ver hoy?</div>
+            <span class="titulo-guion" aria-hidden="true"></span>
+            <div class="filtros categorias-grid">
+                <button class="filtro categoria-card active" data-categoria="futbol">
+                    <img class="categoria-icono" src="futbol-balon.png" alt="">
+                    <span class="categoria-nombre">Fútbol</span>
+                    <span class="categoria-desc">Selecciones y clubes</span>
+                </button>
+                <button class="filtro categoria-card" data-categoria="f1">
+                    <img class="categoria-icono" src="f1-logo.png" alt="">
+                    <span class="categoria-nombre">F1</span>
+                    <span class="categoria-desc">Escuderías oficiales</span>
+                </button>
+                <button class="filtro categoria-card" data-categoria="nba">
+                    <img class="categoria-icono" src="nba-logo.png" alt="">
+                    <span class="categoria-nombre">NBA</span>
+                    <span class="categoria-desc">Equipos y jugadores</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="seccion-activa" id="seccionActiva">
+            <img class="seccion-icono" id="seccionIcono" src="futbol-balon.png" alt="">
+            <div class="seccion-texto">
+                <div class="seccion-nombre" id="seccionNombre">Fútbol</div>
+                <div class="seccion-desc" id="seccionDesc">Selecciones y clubes de todo el mundo</div>
+            </div>
+        </div>
+
+        <div class="buscador-wrap">
+            <input type="text" id="buscador" class="buscador" placeholder="Buscar por equipo, selección, jugador o año...">
+        </div>
+
+        <div class="filtros-sub" id="subFiltros">
+            <select id="subFiltroSelect" class="filtro-select" aria-label="Filtrar por liga, escudería o equipo"></select>
+            <select id="equipoFiltroSelect" class="filtro-select" aria-label="Filtrar por equipo" style="display:none;"></select>
+        </div>
+
+
+        <div class="grid" id="grid"></div>
+        <p class="sin-resultados" id="sinResultados" style="display:none;">No encontramos jerseys con ese criterio.</p>
+    </div>
+
+    <!-- Modal para ver imagen grande -->
+    <div class="modal" id="modal">
+        <button class="close-btn" onclick="cerrarModal()">&times;</button>
+
+        <div class="modal-panel active" id="panelFoto">
+            <div class="modal-content" id="modalContent">
+                <img id="modalImg" src="" alt="">
+                <div class="zoom-controls">
+                    <button onclick="botonZoom(1)" title="Acercar">+</button>
+                    <button onclick="botonZoom(-1)" title="Alejar">&minus;</button>
+                </div>
+            </div>
+            <div class="modal-info">
+                <div class="nombre" id="modalNombre"></div>
+                <div class="precio-wrap">
+                    <span class="precio-anterior" id="modalPrecioAnterior"></span>
+                    <span class="precio" id="modalPrecio"></span>
+                </div>
+                <div class="zoom-hint">Rueda o pellizca para zoom · doble clic para restablecer</div>
+            </div>
+        </div>
+
+        <div class="modal-panel" id="panelInfoPedido">
+            <div class="info-pedido-scroll">
+                <div class="info-pedido-bloque">
+                    <div class="info-pedido-titulo">Info de tu pedido</div>
+                    <ul class="info-pedido-lista">
+                        <li>✔ Si tenemos stock, entrega inmediata en Tepic y Xalisco.</li>
+                        <li>🕒 Si no hay stock disponible, el pedido tarda aproximadamente <strong>18 días</strong> en llegar.</li>
+                        <li>🚚 Envíos a todo México — el costo se cotiza aparte (gratis a partir de cierta cantidad de jerseys).</li>
+                        <li>👕 ¿La quieres con manga larga, parches, número o algo personalizado? Dínoslo al hacer tu pedido.</li>
+                        <li>🔍 Esta jersey es de referencia — si buscas otra que no está en el catálogo, escríbenos y la conseguimos.</li>
+                    </ul>
+                </div>
+                <div class="info-pedido-bloque">
+                    <div class="info-pedido-titulo">Tabla de tallas (cm)</div>
+                    <table class="tabla-tallas">
+                        <thead>
+                            <tr><th>Talla</th><th>Largo</th><th>Pecho</th><th>Estatura</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>S</td><td>69</td><td>96</td><td>162–167</td></tr>
+                            <tr><td>M</td><td>73</td><td>100</td><td>167–172</td></tr>
+                            <tr><td>L</td><td>76</td><td>104</td><td>172–177</td></tr>
+                            <tr><td>XL</td><td>79</td><td>108</td><td>177–182</td></tr>
+                            <tr><td>XXL</td><td>83</td><td>112</td><td>182–190</td></tr>
+                            <tr><td>XXXL</td><td>87</td><td>116</td><td>190–198</td></tr>
+                            <tr><td>XXXXL</td><td>92</td><td>120</td><td>198–208</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-tabs">
+            <button class="modal-tab active" id="tabFoto" onclick="cambiarTabModal('foto')">Foto</button>
+            <button class="modal-tab" id="tabInfo" onclick="cambiarTabModal('info')">Info de pedido</button>
+        </div>
+    </div>
+
+    <div class="como-comprar-wrap">
+    <div class="como-comprar container">
+        <div class="como-comprar-titulo">¿Cómo comprar?</div>
+        <div class="pasos-grid">
+            <div class="paso">
+                <div class="paso-numero">1</div>
+                <div class="paso-titulo">Elige</div>
+                <div class="paso-desc">Explora el catálogo y elige tu jersey favorito</div>
+            </div>
+            <div class="paso">
+                <div class="paso-numero">2</div>
+                <div class="paso-titulo">Escríbenos</div>
+                <div class="paso-desc">Contáctanos por WhatsApp o Instagram</div>
+            </div>
+            <div class="paso">
+                <div class="paso-numero">3</div>
+                <div class="paso-titulo">Coordina</div>
+                <div class="paso-desc">Coordinamos pago y envío a todo México</div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer>Rey del Jersey · Hecho para quienes viven el fútbol</footer>
+
+    <script>
+        // Precio "antes de rebaja": siempre $100 MXN más que el precio actual del producto
+        function calcularPrecioAnterior(precioStr) {
+            const numero = parseInt(String(precioStr).replace(/[^0-9]/g, ""), 10);
+            if (isNaN(numero)) return "";
+            return "$" + (numero + 100);
+        }
+
+        // ---- Modo oscuro ----
+        function alternarModoOscuro() {
+            document.body.classList.toggle("dark");
+            const activo = document.body.classList.contains("dark");
+            localStorage.setItem("reydeljersey_modoOscuro", activo ? "1" : "0");
+            document.getElementById("btnModoOscuro").textContent = activo ? "☀️" : "🌙";
+        }
+
+        (function aplicarModoOscuroGuardado() {
+            if (localStorage.getItem("reydeljersey_modoOscuro") === "1") {
+                document.body.classList.add("dark");
+                document.addEventListener("DOMContentLoaded", function() {
+                    const btn = document.getElementById("btnModoOscuro");
+                    if (btn) btn.textContent = "☀️";
+                });
+            }
+        })();
+
+        // ---- Favoritos (guardados en el navegador) ----
+        function obtenerFavoritos() {
+            try {
+                return JSON.parse(localStorage.getItem("reydeljersey_favoritos") || "[]");
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function esFavorito(idJersey) {
+            return obtenerFavoritos().includes(idJersey);
+        }
+
+        function alternarFavorito(idJersey, btnEl) {
+            let favoritos = obtenerFavoritos();
+            if (favoritos.includes(idJersey)) {
+                favoritos = favoritos.filter(id => id !== idJersey);
+            } else {
+                favoritos.push(idJersey);
+            }
+            localStorage.setItem("reydeljersey_favoritos", JSON.stringify(favoritos));
+            if (btnEl) {
+                btnEl.classList.toggle("activo");
+                btnEl.textContent = favoritos.includes(idJersey) ? "♥" : "♡";
+            }
+        }
+
+        // ---- Compartir producto (WhatsApp / Instagram) ----
+        function compartirProducto(idJersey, event) {
+            event.stopPropagation();
+            const j = jerseys.find(x => (x.nombre + x.precio) === idJersey);
+            if (!j) return;
+            const texto = "Mira este jersey: " + j.nombre + " - " + j.precio + " en Rey del Jersey";
+            const urlImagen = new URL(j.img, window.location.href).href;
+            if (navigator.share) {
+                fetch(urlImagen).then(r => r.blob()).then(blob => {
+                    const archivo = new File([blob], "jersey.jpg", { type: blob.type || "image/jpeg" });
+                    const datosCompartir = { title: j.nombre, text: texto, files: [archivo] };
+                    if (navigator.canShare && navigator.canShare(datosCompartir)) {
+                        navigator.share(datosCompartir).catch(() => {});
+                    } else {
+                        navigator.share({ title: j.nombre, text: texto, url: urlImagen }).catch(() => {});
+                    }
+                }).catch(() => {
+                    navigator.share({ title: j.nombre, text: texto, url: urlImagen }).catch(() => {});
+                });
+            } else {
+                window.open("https://wa.me/?text=" + encodeURIComponent(texto + " " + urlImagen), "_blank");
+            }
+        }
+
+        // ---- Recordar la ultima categoria/filtro visto ----
+        function guardarFiltroVisto() {
+            localStorage.setItem("reydeljersey_categoria", categoriaActiva);
+        }
+
+        let jerseys = [];
+
+        function cargarProductos() {
+            fetch("productos.json")
+                .then(res => res.json())
+                .then(data => {
+                    const futbol = (data.futbol || []).map(j => Object.assign({}, j, { categoria: "futbol", subcategoria: j.liga }));
+                    const f1 = (data.f1 || []).map(j => Object.assign({}, j, { categoria: "f1", subcategoria: j.equipo }));
+                    const nba = (data.nba || []).map(j => Object.assign({}, j, { categoria: "nba", subcategoria: j.equipo }));
+                    jerseys = futbol.concat(f1, nba);
+                    if (categoriaActiva === "futbol") poblarEquiposFutbol();
+                    mostrarProductos();
+                })
+                .catch(err => {
+                    console.error("No se pudo cargar productos.json:", err);
+                    document.getElementById("grid").innerHTML = '<p style="grid-column:1/-1; text-align:center; font-family:var(--font-mono); color:var(--muted);">No se pudieron cargar los productos.</p>';
+                });
+        }
+
+        let categoriaActiva = localStorage.getItem("reydeljersey_categoria") || "futbol";
+        let subFiltroActivo = "todos";
+        let equipoFutbolActivo = "todos";
+        let terminoBusqueda = "";
+
+        // Refleja en la UI (botón de categoría activo, opciones del selector) la categoria restaurada
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.filtros:not(.filtros-sub) .filtro').forEach(b => {
+                b.classList.toggle("active", b.dataset.categoria === categoriaActiva);
+            });
+            poblarSubcategorias();
+            document.getElementById("equipoFiltroSelect").style.display = (categoriaActiva === "futbol") ? "" : "none";
+            if (categoriaActiva === "futbol") poblarEquiposFutbol();
+            aplicarAcentoCategoria();
+        });
+
+        const infoCategorias = {
+            futbol: { icono: "futbol-balon.png", nombre: "Fútbol", desc: "Selecciones y clubes de todo el mundo" },
+            f1: { icono: "f1-logo.png", nombre: "F1", desc: "Escuderías oficiales de la temporada" },
+            nba: { icono: "nba-logo.png", nombre: "NBA", desc: "Equipos y jugadores de la liga" }
+        };
+
+        // Subsecciones de cada categoría (liga en futbol, equipo en F1/NBA).
+        // Aparecen aunque todavía no tengan productos cargados, para que la
+        // estructura ya esté lista cuando se agreguen desde el panel.
+        const subcategorias = {
+            futbol: [
+                { value: "alemania", label: "Alemania — Bundesliga" },
+                { value: "arabia", label: "Arabia Saudita — Saudi Pro League" },
+                { value: "argentina", label: "Argentina — Liga Profesional" },
+                { value: "brasil", label: "Brasil — Brasileirão" },
+                { value: "espana", label: "España — La Liga" },
+                { value: "espana_segunda", label: "España — Segunda División" },
+                { value: "francia", label: "Francia — Ligue 1" },
+                { value: "holanda", label: "Holanda — Eredivisie" },
+                { value: "inglaterra", label: "Inglaterra — Premier League" },
+                { value: "inglaterra_segunda", label: "Inglaterra — Championship" },
+                { value: "italia", label: "Italia — Serie A" },
+                { value: "mexico", label: "México — Liga MX" },
+                { value: "mls", label: "MLS (EE. UU. / Canadá)" },
+                { value: "portugal", label: "Portugal — Primeira Liga" },
+                { value: "turquia", label: "Turquía — Süper Lig" },
+                { value: "selecciones", label: "Selecciones nacionales" },
+                { value: "otras", label: "Otras ligas" }
+            ],
+            f1: [
+                { value: "alpine", label: "Alpine" },
+                { value: "aston_martin", label: "Aston Martin" },
+                { value: "audi", label: "Audi" },
+                { value: "cadillac", label: "Cadillac" },
+                { value: "ferrari", label: "Ferrari" },
+                { value: "haas", label: "Haas" },
+                { value: "mclaren", label: "McLaren" },
+                { value: "mercedes", label: "Mercedes" },
+                { value: "racing_bulls", label: "Racing Bulls" },
+                { value: "red_bull", label: "Red Bull Racing" },
+                { value: "williams", label: "Williams" }
+            ],
+            nba: [
+                { value: "76ers", label: "Philadelphia 76ers" },
+                { value: "bucks", label: "Milwaukee Bucks" },
+                { value: "bulls", label: "Chicago Bulls" },
+                { value: "cavaliers", label: "Cleveland Cavaliers" },
+                { value: "celtics", label: "Boston Celtics" },
+                { value: "clippers", label: "LA Clippers" },
+                { value: "grizzlies", label: "Memphis Grizzlies" },
+                { value: "hawks", label: "Atlanta Hawks" },
+                { value: "heat", label: "Miami Heat" },
+                { value: "hornets", label: "Charlotte Hornets" },
+                { value: "jazz", label: "Utah Jazz" },
+                { value: "kings", label: "Sacramento Kings" },
+                { value: "knicks", label: "New York Knicks" },
+                { value: "lakers", label: "Los Angeles Lakers" },
+                { value: "magic", label: "Orlando Magic" },
+                { value: "mavericks", label: "Dallas Mavericks" },
+                { value: "nets", label: "Brooklyn Nets" },
+                { value: "nuggets", label: "Denver Nuggets" },
+                { value: "pacers", label: "Indiana Pacers" },
+                { value: "pelicans", label: "New Orleans Pelicans" },
+                { value: "pistons", label: "Detroit Pistons" },
+                { value: "raptors", label: "Toronto Raptors" },
+                { value: "rockets", label: "Houston Rockets" },
+                { value: "spurs", label: "San Antonio Spurs" },
+                { value: "suns", label: "Phoenix Suns" },
+                { value: "thunder", label: "Oklahoma City Thunder" },
+                { value: "timberwolves", label: "Minnesota Timberwolves" },
+                { value: "trail_blazers", label: "Portland Trail Blazers" },
+                { value: "warriors", label: "Golden State Warriors" },
+                { value: "wizards", label: "Washington Wizards" }
+            ]
+        };
+
+        function poblarSubcategorias() {
+            const select = document.getElementById("subFiltroSelect");
+            const opciones = subcategorias[categoriaActiva] || [];
+            let html = '<option value="todos">Todos</option>';
+            opciones.forEach(o => {
+                html += '<option value="' + o.value + '">' + o.label + '</option>';
+            });
+            select.innerHTML = html;
+            select.value = subFiltroActivo;
+        }
+
+        // Equipos de futbol: se arman a partir de los jerseys ya cargados
+        // (a diferencia de liga/escudería, no hay una lista maestra fija porque
+        // el equipo se escribe libre en el panel). Si hay una liga elegida, solo
+        // muestra los equipos de esa liga; si es "Todos", muestra todos los equipos.
+        function poblarEquiposFutbol() {
+            const select = document.getElementById("equipoFiltroSelect");
+            const equipos = jerseys
+                .filter(j => j.categoria === "futbol")
+                .filter(j => subFiltroActivo === "todos" || j.subcategoria === subFiltroActivo)
+                .map(j => j.equipo)
+                .filter(Boolean);
+            const unicos = Array.from(new Set(equipos)).sort((a, b) => a.localeCompare(b, "es"));
+            let html = '<option value="todos">Todos los equipos</option>';
+            unicos.forEach(eq => {
+                html += '<option value="' + eq + '">' + eq + '</option>';
+            });
+            select.innerHTML = html;
+            select.value = unicos.includes(equipoFutbolActivo) ? equipoFutbolActivo : "todos";
+            equipoFutbolActivo = select.value;
+        }
+
+        function aplicarAcentoCategoria() {
+            const mapa = { futbol: "--acento-futbol", f1: "--acento-f1", nba: "--acento-nba" };
+            const variable = mapa[categoriaActiva] || "--acento-futbol";
+            document.documentElement.style.setProperty("--acento", "var(" + variable + ")");
+            document.documentElement.style.setProperty("--acento-tint", "var(" + variable + "-tint)");
+            document.documentElement.style.setProperty("--hero-tint", "var(" + variable + "-tint-strong)");
+            document.body.dataset.categoria = categoriaActiva;
+
+            const info = infoCategorias[categoriaActiva] || infoCategorias.futbol;
+            document.getElementById("seccionIcono").src = info.icono;
+            document.getElementById("seccionNombre").textContent = info.nombre;
+            document.getElementById("seccionDesc").textContent = info.desc;
+        }
+
+        function normalizar(str) {
+            return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function pasaFiltros(j) {
+            if (categoriaActiva !== "todos" && j.categoria !== categoriaActiva) return false;
+            if (subFiltroActivo !== "todos" && j.subcategoria !== subFiltroActivo) return false;
+            if (categoriaActiva === "futbol" && equipoFutbolActivo !== "todos" && j.equipo !== equipoFutbolActivo) return false;
+            if (terminoBusqueda && !normalizar(j.nombre).includes(normalizar(terminoBusqueda))) return false;
+            return true;
+        }
+
+        function abrirModal(jersey, evt) {
+            // Ancla el punto de origen del modal a la tarjeta que se tocó,
+            // para que la imagen parezca "crecer" desde ahí, no aparecer en el centro
+            const origenEl = evt ? evt.currentTarget : null;
+            if (origenEl) {
+                const rect = origenEl.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                document.getElementById("modalContent").style.transformOrigin = cx + "px " + cy + "px";
+            }
+            document.getElementById("modal").classList.add("active");
+            document.getElementById("modalImg").src = jersey.img;
+            document.getElementById("modalNombre").textContent = jersey.nombre;
+            document.getElementById("modalPrecio").textContent = jersey.precio;
+            document.getElementById("modalPrecioAnterior").textContent = calcularPrecioAnterior(jersey.precio);
+            cambiarTabModal("foto");
+            resetZoom();
+        }
+
+        function cambiarTabModal(tab) {
+            const esFoto = tab === "foto";
+            document.getElementById("panelFoto").classList.toggle("active", esFoto);
+            document.getElementById("panelInfoPedido").classList.toggle("active", !esFoto);
+            document.getElementById("tabFoto").classList.toggle("active", esFoto);
+            document.getElementById("tabInfo").classList.toggle("active", !esFoto);
+        }
+
+        function cerrarModal() {
+            document.getElementById("modal").classList.remove("active");
+            resetZoom();
+        }
+
+        function mostrarProductos() {
+            let html = "";
+            let numero = 0;
+            let coincidencias = 0;
+            jerseys.forEach(j => {
+                numero++;
+                if (pasaFiltros(j)) {
+                    coincidencias++;
+                    const anterior = calcularPrecioAnterior(j.precio);
+                    const tag = "Nº " + String(numero).padStart(2, "0");
+                    const delay = Math.min(numero * 0.025, 0.5);
+                    const idJersey = j.nombre + j.precio;
+                    const favActivo = esFavorito(idJersey) ? "activo" : "";
+                    const corazon = esFavorito(idJersey) ? "♥" : "♡";
+                    html += '<div class="item" style="animation-delay:' + delay + 's" onclick="abrirModal({img: \'' + j.img + '\', nombre: \'' + j.nombre + '\', precio: \'' + j.precio + '\'}, event)">';
+                    html += '<div class="item-img-wrap">';
+                    html += '<img src="' + j.img + '" alt="' + j.nombre + '">';
+                    html += '<span class="squad-tag">' + tag + '</span>';
+                    if (j.masVendido) {
+                        html += '<span class="bestseller-tag">Más vendido</span>';
+                    }
+                    html += '<button class="fav-btn ' + favActivo + '" onclick="event.stopPropagation(); alternarFavorito(\'' + idJersey.replace(/'/g, "\\'") + '\', this)" aria-label="Guardar en favoritos">' + corazon + '</button>';
+                    html += '<span class="item-vista">Ver detalle</span>';
+                    html += '</div>';
+                    html += '<div class="item-info">';
+                    html += '<div class="nombre">' + j.nombre + '</div>';
+                    html += '<div class="precio-wrap">';
+                    html += '<span class="precio-anterior">' + anterior + '</span>';
+                    html += '<span class="precio">' + j.precio + '</span>';
+                    html += '</div>';
+                    html += '<div class="item-info-bottom">';
+                    html += '<button class="compartir-btn" onclick="compartirProducto(\'' + idJersey.replace(/'/g, "\\'") + '\', event)">↗ Compartir</button>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                }
+            });
+            document.getElementById("grid").innerHTML = html;
+            document.getElementById("sinResultados").style.display = coincidencias === 0 ? "block" : "none";
+        }
+
+        // Filtro de categoria (Futbol / F1 / NBA)
+        document.querySelectorAll('.filtros:not(.filtros-sub) .filtro').forEach(btn => {
+            btn.addEventListener("click", function() {
+                document.querySelectorAll('.filtros:not(.filtros-sub) .filtro').forEach(b => b.classList.remove("active"));
+                this.classList.add("active");
+                categoriaActiva = this.dataset.categoria;
+                subFiltroActivo = "todos";
+                equipoFutbolActivo = "todos";
+                poblarSubcategorias();
+                document.getElementById("equipoFiltroSelect").style.display = (categoriaActiva === "futbol") ? "" : "none";
+                if (categoriaActiva === "futbol") poblarEquiposFutbol();
+                aplicarAcentoCategoria();
+                guardarFiltroVisto();
+                mostrarProductos();
+            });
+        });
+
+        // Subfiltro de liga (futbol) o escudería/equipo (F1 / NBA)
+        document.getElementById("subFiltroSelect").addEventListener("change", function() {
+            subFiltroActivo = this.value;
+            if (categoriaActiva === "futbol") {
+                equipoFutbolActivo = "todos";
+                poblarEquiposFutbol();
+            }
+            mostrarProductos();
+        });
+
+        // Subfiltro de equipo dentro de futbol (depende de la liga elegida)
+        document.getElementById("equipoFiltroSelect").addEventListener("change", function() {
+            equipoFutbolActivo = this.value;
+            mostrarProductos();
+        });
+
+        // Buscador en tiempo real
+        document.getElementById("buscador").addEventListener("input", function() {
+            terminoBusqueda = this.value;
+            mostrarProductos();
+        });
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById("modal").addEventListener("click", function(e) {
+            if (e.target === this) {
+                cerrarModal();
+            }
+        });
+
+        // ---- Estado del zoom ----
+        let scale = 1, panX = 0, panY = 0;
+        let isDragging = false, startX = 0, startY = 0;
+        let touchStartDist = 0, touchStartScale = 1;
+        let touchStartPanX = 0, touchStartPanY = 0, touchStartMidX = 0, touchStartMidY = 0;
+        const MIN_SCALE = 1, MAX_SCALE = 4;
+
+        const modalImg = document.getElementById("modalImg");
+        const modalContent = document.getElementById("modalContent");
+
+        function actualizarTransform() {
+            modalImg.style.transform = 'translate(' + panX + 'px, ' + panY + 'px) scale(' + scale + ')';
+            modalImg.classList.toggle('zoomed', scale > 1);
+        }
+
+        function resetZoom() {
+            scale = 1; panX = 0; panY = 0;
+            actualizarTransform();
+        }
+
+        function limitarPan() {
+            const rect = modalContent.getBoundingClientRect();
+            const maxOffsetX = Math.max(0, (rect.width * (scale - 1)) / 2);
+            const maxOffsetY = Math.max(0, (rect.height * (scale - 1)) / 2);
+            panX = Math.max(-maxOffsetX, Math.min(maxOffsetX, panX));
+            panY = Math.max(-maxOffsetY, Math.min(maxOffsetY, panY));
+        }
+
+        function zoomHaciaPunto(nuevaEscala, puntoX, puntoY) {
+            nuevaEscala = Math.min(MAX_SCALE, Math.max(MIN_SCALE, nuevaEscala));
+            const rect = modalContent.getBoundingClientRect();
+            const cx = puntoX - rect.left - rect.width / 2;
+            const cy = puntoY - rect.top - rect.height / 2;
+            const factor = nuevaEscala / scale;
+            panX = cx - (cx - panX) * factor;
+            panY = cy - (cy - panY) * factor;
+            scale = nuevaEscala;
+            if (scale === 1) { panX = 0; panY = 0; }
+            limitarPan();
+            actualizarTransform();
+        }
+
+        function botonZoom(direccion) {
+            const rect = modalContent.getBoundingClientRect();
+            zoomHaciaPunto(scale + direccion * 0.6, rect.left + rect.width / 2, rect.top + rect.height / 2);
+        }
+
+        modalContent.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            const delta = e.deltaY < 0 ? 0.3 : -0.3;
+            zoomHaciaPunto(scale + delta, e.clientX, e.clientY);
+        }, { passive: false });
+
+        modalImg.addEventListener('dblclick', resetZoom);
+
+        modalImg.addEventListener('click', function(e) {
+            if (scale === 1) {
+                zoomHaciaPunto(2.2, e.clientX, e.clientY);
+            }
+        });
+
+        modalImg.addEventListener('mousedown', function(e) {
+            if (scale === 1) return;
+            isDragging = true;
+            modalImg.classList.add('dragging');
+            startX = e.clientX - panX;
+            startY = e.clientY - panY;
+        });
+        window.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            panX = e.clientX - startX;
+            panY = e.clientY - startY;
+            limitarPan();
+            actualizarTransform();
+        });
+        window.addEventListener('mouseup', function() {
+            isDragging = false;
+            modalImg.classList.remove('dragging');
+        });
+
+        function distanciaEntreToques(touches) {
+            const dx = touches[0].clientX - touches[1].clientX;
+            const dy = touches[0].clientY - touches[1].clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function puntoMedio(touches) {
+            return {
+                x: (touches[0].clientX + touches[1].clientX) / 2,
+                y: (touches[0].clientY + touches[1].clientY) / 2
+            };
+        }
+
+        modalContent.addEventListener('touchstart', function(e) {
+            if (e.touches.length === 2) {
+                touchStartDist = distanciaEntreToques(e.touches);
+                touchStartScale = scale;
+                touchStartPanX = panX;
+                touchStartPanY = panY;
+                const mid = puntoMedio(e.touches);
+                touchStartMidX = mid.x;
+                touchStartMidY = mid.y;
+            } else if (e.touches.length === 1 && scale > 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - panX;
+                startY = e.touches[0].clientY - panY;
+            }
+        }, { passive: true });
+
+        modalContent.addEventListener('touchmove', function(e) {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const nuevaDist = distanciaEntreToques(e.touches);
+                const nuevaEscala = Math.min(MAX_SCALE, Math.max(MIN_SCALE, touchStartScale * (nuevaDist / touchStartDist)));
+                const rect = modalContent.getBoundingClientRect();
+                const cx = touchStartMidX - rect.left - rect.width / 2;
+                const cy = touchStartMidY - rect.top - rect.height / 2;
+                const factor = nuevaEscala / touchStartScale;
+                const mid = puntoMedio(e.touches);
+                panX = cx - (cx - touchStartPanX) * factor + (mid.x - touchStartMidX);
+                panY = cy - (cy - touchStartPanY) * factor + (mid.y - touchStartMidY);
+                scale = nuevaEscala;
+                if (scale === 1) { panX = 0; panY = 0; }
+                limitarPan();
+                actualizarTransform();
+            } else if (e.touches.length === 1 && isDragging) {
+                e.preventDefault();
+                panX = e.touches[0].clientX - startX;
+                panY = e.touches[0].clientY - startY;
+                limitarPan();
+                actualizarTransform();
+            }
+        }, { passive: false });
+
+        modalContent.addEventListener('touchend', function() {
+            isDragging = false;
+        });
+
+        cargarProductos();
+
+        // Encogido del título/héroe al bajar: cambia clase con rAF para animación fluida
+        (function() {
+            const UMBRAL = 80;
+            let ticking = false;
+            function actualizarEstadoScroll() {
+                document.body.classList.toggle('is-scrolled', window.scrollY > UMBRAL);
+                ticking = false;
+            }
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(actualizarEstadoScroll);
+                    ticking = true;
+                }
+            }, { passive: true });
+            actualizarEstadoScroll();
+        })();
+    </script>
+    <!-- Detecta el link de invitación/confirmación de Netlify Identity -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", function (user) {});
+            // Si el link trae un token de invitación/recuperación en la URL,
+            // el widget abre automáticamente el formulario para crear la contraseña.
+            window.netlifyIdentity.on("login", function () {
+                window.location.href = "/admin/";
+            });
+        }
+    </script>
+</body>
+</html>
