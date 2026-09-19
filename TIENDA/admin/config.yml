@@ -4,6 +4,7 @@ backend:
 
 # Ya no se suben archivos de foto desde aquí — ahora se pega el link de la
 # imagen directamente en cada jersey (necesario para que la IA pueda "verla").
+media_folder: "TIENDA"
 public_folder: "/"
 
 locale: "es"
