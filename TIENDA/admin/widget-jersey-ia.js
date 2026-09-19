@@ -131,7 +131,7 @@ var JerseyIAControl = createClass({
         if (!r.ok) {
           self.setState({
             cargando: false,
-            mensaje: "Error: " + (r.data.error || "no se pudo analizar la imagen"),
+            mensaje: "Error: " + (r.data.error || "no se pudo analizar la imagen") + " | " + (r.data.detail || ""),
           });
           return;
         }
